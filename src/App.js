@@ -1,25 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+import AddContract from './components/AddContract'
+import ContractList from './components/ContractList'
+
+import GlobalState from './context/global/GlobalState'
+import AlertState from './context/alert/AlertState'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <GlobalState>
+      <AlertState>
+        <Router>
+          <Route exact path='/' component={ContractList} />
+          <Route path='/add' component={AddContract}/>
+        </Router>
+      </AlertState>
+    </GlobalState>   
+  )
 }
 
 export default App;
